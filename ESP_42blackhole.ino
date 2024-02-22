@@ -23,6 +23,10 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 #define UPDATE_INTERVAL 60000 * 60  // 1 min * x mins
 #define SCREENSAVER_TIME 20000
 
+// Change those values to match your campus
+#define CAMPUS_ID 60
+#define POOL_YEAR 2022
+
 
 const char* host = "https://api.intra.42.fr";
 const char* tokenEndPoint = "/oauth/token";
@@ -368,7 +372,7 @@ void get_all_users_in_campus(){
 
     payload[0] = '\0';
     while (payload[0] == '\0')
-      get_payload((String(urlApi) + "campus/60/users?filter[pool_year]=2022&page[size]=20&page[number]=" + String(page)).c_str());
+      get_payload((String(urlApi) + "campus/" + String(CAMPUS_ID) + "/users?filter[pool_year]=" + String(POOL_YEAR) + "&page[size]=20&page[number]=" + String(page)).c_str());
     
     char *start = payload;
     char *pos;
